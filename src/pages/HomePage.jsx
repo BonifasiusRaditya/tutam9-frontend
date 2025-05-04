@@ -49,7 +49,6 @@ const toggleTask = (task) => {
   });
 };
 
-//delete task
 const deleteTask = (id) => {
   axios.delete(`https://tutam9-back.vercel.app/home/${id}`)
     .then((res) => {
@@ -61,70 +60,45 @@ const deleteTask = (id) => {
     });
 };
 
-// const deleteTask = (id) => {
-//   setTasks(tasks.filter(task => task.id !== id));
-// };
-
-
   const completedCount = tasks.filter(t => t.completed).length;
   const completionRate = tasks.length ? (completedCount / tasks.length) * 100 : 0;
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F5FAF8]">
       <div className="bg-white rounded-2xl shadow-md p-6 w-full max-w-md">
-        <h1 className="text-2xl font-semibold mb-4 text-[#1F2937] flex items-center">
-          ✅ To-Do List
-        </h1>
+        <h1 className="text-2xl font-semibold mb-4 text-[#1F2937] flex items-center">✅ To-Do List</h1>
+
         <div className="flex mb-4">
-          <input
-            type="text"
-            className="flex-grow px-4 bg-white text-black py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300"
-            placeholder="Add a new task..."
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-          />
-          <button
-            onClick={addTask}
-            className="bg-white text-black px-4 border focus:outline-none focus-ring-2 focus:ring-[#1F2937] rounded-lg hover:bg-gray-200 ml-2"
-          >
+          <input type="text" className="flex-grow px-4 bg-white text-black py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-300" placeholder="Add a new task..." value={newTask} onChange={(e) => setNewTask(e.target.value)}/>
+          <button onClick={addTask} className="bg-white text-black px-4 border focus:outline-none focus-ring-2 focus:ring-[#1F2937] rounded-lg hover:bg-gray-200 ml-2">
             +
           </button>
         </div>
+
         <ul className="space-y-2">
           {tasks.map(task => (
-            <li
-              key={task.id}
-              className="flex items-center justify-between p-2 border rounded-lg"
-            >
-              <div
-                onClick={() => toggleTask(task)}
-                className={`flex-grow cursor-pointer ${
-                  task.completed ? 'line-through text-gray-400' : 'text-[#1F2937]'
-                }`}
-              >
+            <li key={task.id} className="flex items-center justify-between p-2 border rounded-lg">
+              
+              <div onClick={() => toggleTask(task)} className={`flex-grow cursor-pointer ${ task.completed ? 'line-through text-gray-400' : 'text-[#1F2937]' }`}>
                 {task.text}
               </div>
-              <button
-                onClick={() => deleteTask(task.id)}
-                className="text-black hover:bg-gray-200 bg-white"
-              >
+
+              <button onClick={() => deleteTask(task.id)} className="text-black hover:bg-gray-200 bg-white">
                 ✕
               </button>
             </li>
           ))}
         </ul>
+
         <div className="text-center text-sm text-gray-500 mt-4"> 
           {completedCount} of {tasks.length} tasks complete
           <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-            <div
-              className="bg-[#1F2937] h-2 rounded-full"
-              style={{ width: `${completionRate}%` }}
-            ></div>
+            <div className="bg-[#1F2937] h-2 rounded-full" style={{ width: `${completionRate}%` }}></div>
           </div>
           <span className="text-xs">{Math.round(completionRate)}%</span>
         </div>
         <div className="text-center text-xs text-gray-400 mt-4">
-          ©BonifasiusRaditya (2306242350) - 2025
+          ©BonifasiusRaditya (2306242350) - Tutam9
         </div>
       </div>
     </div>
